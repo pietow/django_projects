@@ -3,7 +3,28 @@
 <body>
 {% block content1 %}
     <h1>Homepage</h1>
+    <h2>{{ key1|add:key2 }}</h2>
+    <h2>{{ key2 }}</h2>
+    <h2>{{ title|lower }}</h2>
+    <h2>{{ today|date:"D d M Y"  }}</h2>
+
+<ul>
+    {% for item in first %}
+        <li>
+            {% if item == 1 %}
+                The number is one.
+            {% elif item == 2 %}
+                The number is two.
+            {% else %}
+                The number is something else: {{ item }}.
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+    
+
 {% endblock content1  %}
+
 
 {% block content2 %}
     <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, excepturi aspernatur explicabo illo obcaecati facilis, dolores enim nesciunt a dolorem rerum voluptates saepe dolore eius impedit ipsam nihil veniam perspiciatis!</div>
