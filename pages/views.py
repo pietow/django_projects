@@ -2,6 +2,7 @@ from django.views.generic import TemplateView
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render
 from datetime import datetime
+from django.utils.safestring import mark_safe
 
 # Create your views here.
 class HomePageView(TemplateView):
@@ -89,6 +90,15 @@ class HomePageView2(TemplateView):
         context['key1'] = 'value1'
         context['key2'] = 'value2'
         context['title'] = 'Hello World'
+        context['number'] = 4
+        context['numbers'] = ['4', '2']
+        context['value'] = 'LOVING this Album'
+        context['date_vl'] = datetime.now()
+        context['notes'] = mark_safe("<strong>Note:</strong>Hello")
+        #context['js_inject'] = mark_safe("<script>alert('Hello World')</script>")
+
+        context['nums'] = [1, 2, 3]
+
         return context
 
 

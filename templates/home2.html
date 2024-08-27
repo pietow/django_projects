@@ -1,3 +1,6 @@
+{% load my_tags %}
+{% load footer_tags %}
+{% load custom_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,6 +11,43 @@
 <body>
    Second home 
    <h2>{{ key1 }}</h2>
+    <h2>
+        {% if key1 == 'value1' %}
+            First key
+        {% else %}
+            Another key
+        {% endif %}
+
+    </h2>
+
    <h2>{{ key2 }}</h2>
+   <h2>{{ number|add:'2' }}</h2>
+   <h2>{{ key1|add:key2 }}</h2>
+   <h2> {{ numbers|join:'' }} </h2>
+   <h2>{{ value|lower }}</h2>
+   <h2> {{ date_vl|date:'D d M Y' }}</h2>
+   {{ notes }}
+
+   {{js_inject}}
+
+   <ul>
+    {% for item in nums %}
+
+        <li>
+            {% if item == 1 %}
+                The number is one
+            {% elif item == 2 %}
+                The number is two
+            {% else %}
+                The number is something else:
+                    {{ item }}
+            {% endif %}
+        </li>
+
+    {% endfor %}
+   </ul>
+   <p>{% hello_world %}</p>
+   {{ "apple-orange-banana"|custom_split:"-" }}
+   {% render_footer 'Nike' %}
 </body>
 </html>
