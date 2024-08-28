@@ -27,8 +27,32 @@ class HomePageView(TemplateView):
         return context
 
 
-class AboutPageView(TemplateView):
+
+
+from django.http import HttpResponseForbidden
+
+class ActiveUserRequiredMixin:
+    def dispatch(self, request, *args, **kwargs):
+        
+        print(request.COOKIES)
+        if request.COOKIES.get('my_key') == 'my_value':
+            return super().dispatch(request, *args, **kwargs)
+        return HttpResponseForbidden('You are not allowed to access')
+
+
+class AboutPageView(ActiveUserRequiredMixin, TemplateView):
     template_name = "about.html"
+
+
+
+
+
+
+
+
+
+
+
 
 def home_func_view(request):
     # print(request.method) # GET
@@ -69,9 +93,9 @@ def home_func_view(request):
 
 
 class HomePageView2(TemplateView):
-    template_name = "home2.html"
 
     def dispatch(self, request, *args, **kwargs):
+        print(AboutPageView.__mro__)
         print(request.method) 
         return super().dispatch(request, *args, **kwargs)
 
